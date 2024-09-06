@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+
+<body class="bg-black">
+    <div>
+        <section class="flex p-4 sticky m-8 top-0 bg-black z-20  justify-center items-center flex-wrap ">
+                <div class="flex  w-full  justify-evenly gap-6 items-center">
+                    <div class="relative">
+                        <details class="group [&_summary::-webkit-details-marker]:hidden">
+                            <summary
+                                class="flex cursor-pointer items-center  text-gray-900 transition hover:border-gray-600 dark:text-white">
+                                <div class="m-4">
+                                    <i class="fa-solid fa-filter text-white text-2xl"></i>
+                                </div>
+                              
+                            </summary>
+                         
+                            <div
+                                class="z-50 group-open:absolute group-open:start-0 group-open:top-auto group-open:mt-2">
+                                <div
+                                    class="w-96 rounded border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900 dark:focus:ring-offset-gray-900">
+                                    <ul class="space-y-1 border-t border-gray-200 p-4 dark:border-gray-700">
+                                        <li>
+                                            <label for="checkBoxElectronics"
+                                                class="cursor-pointer inline-flex items-center gap-2">
+                                                <input type="checkbox" id="checkBoxElectronics"
+                                                    class="size-5 cursor-pointer  rounded border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-900" />
+
+                                                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">
+                                                   Electronics 
+                                                </span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="checkBoxWomanClothes"
+                                                class="cursor-pointer inline-flex items-center gap-2">
+                                                <input type="checkbox" id="checkBoxWomanClothes"
+                                                    class="size-5 cursor-pointer  rounded border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-900" />
+
+                                                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">
+                                                    Women's clothing
+                                                </span>
+                                            </label>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                    <div>
+                        <label for="inputBuscarProducto" class="sr-only"> Busca un producto </label>
+
+                        <input type="text" id="inputBuscarProducto" placeholder="Search for..."
+                            class="w-full rounded-md border-gray-200 py-2.5 px-4 pe-10 shadow-sm sm:text-sm" />
+                    </div>
+                    <div class="relative py-2 cursor-pointer" id="iconCarrito"  >
+                        <div class="t-0 absolute left-3">
+                            <p id="textCarrito"
+                                class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
+                                0</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="#fff" class="file: mt-4 h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                        </svg>
+                    </div>
+                </div>
+        </section>
+
+
+        <div id="productosVacios" role="alert" class="m-12 rounded border-s-4 border-red-500 bg-red-50 p-4">
+            <strong class="block font-medium text-red-800"> No se encontro el producto </strong>
+            <p class="mt-2 text-sm text-red-700">
+                El producto no esta en la base de datos, busque otro producto.
+            </p>
+        </div>
+
+        <section id="containerProductos" class="m-16 flex justify-center flex-wrap gap-8  ">
+
+        </section>
+      
+        <div class="hidden mx-6 overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none flex h-screen justify-center items-center " id="modalCarritoCompras">
+            <div class="relative w-auto my-6 mx-auto max-w-3xl">
+              <!--content-->
+              <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <!--header-->
+                <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <h3 class="text-xl font-semibold">
+                    Carrito de compras
+                  </h3>
+                  <button id="btnCloseCarrito1" class="p-1 ml-auto border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none">
+                    <i  class="fa-solid fa-circle-xmark text-red-600"></i>
+                  </button>
+                
+                </div>
+                <!--body-->
+                <div class="relative p-6 flex-auto">
+                
+                    <table class="w-full table-auto">
+                        <thead class="bg-gray-50 text-xs font-semibold uppercase text-gray-400">
+                            <tr>
+                                <th class="p-2">
+                                    <div class="text-left font-semibold">Nombre</div>
+                                </th>
+                                <th class="p-2">
+                                    <div class="text-left font-semibold">Cantidad</div>
+                                </th>
+                                <th class="p-2">
+                                    <div class="text-left font-semibold">Precio</div>
+                                </th>
+                                <th class="p-2">
+                                    <div class="text-center font-semibold">Action</div>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="containerSubProductos" class="divide-y divide-gray-100 text-sm ">
+                            
+
+                        </tbody>
+                    
+                    </table>
+
+                </div>
+               <div class="flex w-full justify-end">
+                <p id="textTotalCarrito"class="font-bold text-lg me-4 ">
+
+                </p>
+               </div>
+                <!--footer-->
+                <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    
+                  <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" id="btnCloseCarrito2">
+                    Cerrar
+                  </button>
+                  <button class="bg-black text-white active:bg-gray-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" id="btnComprarProductos">
+                    Comprar ahora
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+     
+
+    </div>
+</body>
+
+<script src="database.js"></script>
+<script src="filtros.js"></script>
+<script src="website.js"></script>
+
+</html>
